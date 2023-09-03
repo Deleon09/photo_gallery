@@ -14,7 +14,7 @@ const router = Router();
 
 router.get('/', async(req, res) => {
     const photos = await Photo.find();
-    res.render('images', {photos});
+    res.status(200).json(photos);
 });
 
 router.get('/images/add', async(req, res) => {

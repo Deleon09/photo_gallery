@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const morgan = require('morgan');
 const multer = require('multer');
 const path = require('path');
@@ -7,6 +8,9 @@ const { dbConnection } = require('./database');
  
 // Initializations
 const app = express();
+
+// CORS config
+app.use(cors());
 
 // Database
 dbConnection();
