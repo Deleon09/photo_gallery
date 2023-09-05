@@ -22,6 +22,14 @@ router.get('/images/add', async(req, res) => {
     res.render('image_form', { photos });
 });
 
+router.post('/images/filter', async(req, res) => {
+    
+    const { fil } = req.body;
+
+    const photos = await Photo.find({ title: { $regex: new RegExp(fil, 'i') } });
+    res.status(200).json(photos);
+});
+
 router.post('/images/add', async(req, res) => {
 
     const { title, description } = req.body;
@@ -37,7 +45,7 @@ router.post('/images/add', async(req, res) => {
     await newPhoto.save();
     await fs.unlink(req.file.path);
 
-    res.send('received');
+    res.status(200).json(newPhoto);
 });
 
 module.exports = router;
